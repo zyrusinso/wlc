@@ -5,7 +5,9 @@ use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\TeamComponent;
 use App\Http\Livewire\TransactionComponent;
 use App\Http\Livewire\UserPermissions;
-use App\Http\Livewire\RewardComponent;
+use App\Http\Livewire\Rewards\RewardComponent;
+use App\Http\Livewire\Rewards\GroupSalesBonusComponent;
+use App\Http\Livewire\Rewards\TeamSalesBonusComponent;
 use App\Http\Livewire\StoreComponent;
 use App\Http\Livewire\UserRoles;
 use App\Http\Livewire\TeamViewComponent;
@@ -31,7 +33,7 @@ Route::middleware(['auth', 'accessrole', 'verified', 'userVerified'])->group(fun
     Route::get('/dashboard', HomeComponent::class)->name('dashboard');
     Route::get('/team', TeamComponent::class)->name('team');
     Route::get('/transactions', TransactionComponent::class)->name('transactions');
-    Route::get('/rewards', RewardComponent::class)->name('rewards');
+    // Route::get('/rewards', RewardComponent::class)->name('rewards');
     Route::get('/store', StoreComponent::class)->name('store');
     Route::get('/code', GenerateCode::class)->name('code');
 
@@ -43,6 +45,11 @@ Route::middleware(['auth', 'accessrole', 'verified', 'userVerified'])->group(fun
     Route::get('/products', ProductComponent::class)->name('products');
     Route::get('/products-category', ProductCategoryComponent::class)->name('products-category');
     Route::get('/products-sub-category', ProductSubCategoryComponent::class)->name('products-sub-category');
+
+    // Group/ Sales Bonus and Team Sales Bonus
+    Route::get('/group-sales-bonus', GroupSalesBonusComponent::class)->name('group-sales-bonus');
+    Route::get('/team-sales-bonus', TeamSalesBonusComponent::class)->name('team-sales-bonus');
+    
 });
 
 Route::view('/home', 'home')->name('home');

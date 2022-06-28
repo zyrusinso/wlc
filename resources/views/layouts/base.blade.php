@@ -127,7 +127,7 @@
                         @endif
 
                         @if (\App\Models\UserPermission::isRoleHasRightToAccess(auth()->user()->role, 'rewards'))
-                            <li class="nav-item {{ request()->routeIs('rewards')? 'menu-is-opening menu-open': '' }}">
+                            <li class="nav-item {{ request()->routeIs(['group-sales-bonus', 'team-sales-bonus'])? 'menu-is-opening menu-open': '' }}">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-gift"></i>
                                     <p>
@@ -138,16 +138,22 @@
 
                                 </a>
                                 <ul class="nav nav-treeview">
-                                    <!-- <li class="nav-item">
-                                        <a href="#" class="nav-link {{ request()->routeIs('')? 'active': '' }}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Reward List</p>
-                                        </a>
-                                    </li> -->
                                     <li class="nav-item">
                                         <a href="#" class="nav-link {{ request()->routeIs('/')? 'active': '' }}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>CashBack Bonus <i class="{{ \App\Models\User::cbbDisplayColorCode()[auth()->user()->cbb] }}">{{ \App\Models\User::cbbDisplayNumber()[auth()->user()->cbb] }}</i></p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item open">
+                                        <a href="{{ route('group-sales-bonus') }}" class="nav-link {{ request()->routeIs('group-sales-bonus')? 'active': '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Group Sales Bonus</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('team-sales-bonus') }}" class="nav-link {{ request()->routeIs('team-sales-bonus')? 'active': '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Team Sales Bonus</p>
                                         </a>
                                     </li>
                                 </ul>
