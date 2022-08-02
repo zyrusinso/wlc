@@ -221,6 +221,22 @@
                             </li>
                         @endif
 
+                        @if (\App\Models\UserPermission::isRoleHasRightToAccess(auth()->user()->role, 'code'))
+                            <li class="nav-header">Service Charge</li>
+                            <li class="nav-item">
+                                <a href="{{ route('code') }}" class="nav-link {{ request()->routeIs('code')? 'active': '' }}">
+                                    <i class="fas fa-warehouse nav-icon"></i>
+                                    <p>Stockist</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('code') }}" class="nav-link {{ request()->routeIs('code')? 'active': '' }}">
+                                    <i class="fas fa-users nav-icon"></i>
+                                    <p>Business Center</p>
+                                </a>
+                            </li>
+                        @endif
+
                         @if (\App\Models\UserPermission::isRoleHasRightToAccess(auth()->user()->role, 'user-permissions') || \App\Models\UserPermission::isRoleHasRightToAccess(auth()->user()->role, 'roles'))
                             <li class="nav-header">Users</li>
                         @endif

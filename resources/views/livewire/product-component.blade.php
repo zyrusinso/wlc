@@ -10,7 +10,6 @@
                     </div>
                 </div>
                 <div class="row">
-                    {{ count(\App\Models\ProductSubCategory::productSubCategory()) }}
                     <div class="col-sm-12">
                         <table id="example1" class="table table-bordered table-striped dataTable dtr-inline table-responsive-sm">
                             <thead>

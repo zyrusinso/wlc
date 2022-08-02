@@ -15,6 +15,7 @@ use App\Http\Livewire\ProductComponent;
 use App\Http\Livewire\GenerateCode;
 use App\Http\Livewire\ProductCategoryComponent;
 use App\Http\Livewire\ProductSubCategoryComponent;
+use App\Http\Livewire\VerifyLocation;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\ActivateProject;
 
@@ -29,7 +30,7 @@ Route::get('/', function () {
 
 Route::get('/activate/project', [ActivateProject::class, 'activate']);
 
-Route::middleware(['auth', 'accessrole', 'verified', 'userVerified'])->group(function () {
+Route::middleware(['auth', 'accessrole', 'verified', 'locationVerified', 'userVerified'])->group(function () {
     Route::get('/dashboard', HomeComponent::class)->name('dashboard');
     Route::get('/team', TeamComponent::class)->name('team');
     Route::get('/transactions', TransactionComponent::class)->name('transactions');
@@ -56,3 +57,5 @@ Route::view('/home', 'home')->name('home');
 Route::get('/team/{id}', TeamViewComponent::class)->name('team.index');
 Route::get('/user/change-password', [ChangePassword::class, 'index'])->name('user.pass');
 Route::post('/user/change-password', [ChangePassword::class, 'update'])->name('user.pass.update');
+
+Route::get('/verify-location', VerifyLocation::class)->name('verify.location');

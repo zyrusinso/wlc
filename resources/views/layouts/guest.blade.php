@@ -16,6 +16,8 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
+        @livewireStyles
+
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
         @if (request()->is('register'))
@@ -44,6 +46,14 @@
         @endif
     </head>
     <body class="font-sans antialiased">
+
+        
         {{ $slot }}
+
+        @stack('modals')
+
+        @livewireScripts
+
+        @stack('scripts')
     </body>
 </html>

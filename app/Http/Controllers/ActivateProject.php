@@ -42,6 +42,18 @@ class ActivateProject extends Controller
                     'redirect_url' => 'transactions',
                     'redirect_url_name' => 'Transactions',
                 ],
+                [
+                    'role' => 'stockist', 
+                    'name'=> 'Stockist', 
+                    'redirect_url' => 'dashboard',
+                    'redirect_url_name' => 'Dashboard',
+                ],
+                [
+                    'role' => 'business-center', 
+                    'name'=> 'Business Center', 
+                    'redirect_url' => 'dashboard',
+                    'redirect_url_name' => 'Dashboard',
+                ],
             );
 
             UserPermission::create(
