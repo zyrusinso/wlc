@@ -31,7 +31,7 @@
                     <option>-- Select a Region --</option>
                     @if(count($regionSelection) > 0)
                         @foreach($regionSelection as $key => $item)
-                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                            <option value="{{ $item['regCode'] }}">{{ $item['regDesc'] }}</option>
                         @endforeach
                     @endif
                 </select>
@@ -41,27 +41,27 @@
                     <option>-- Select a Province --</option>
                     @if(count($provinceSelection) > 0)
                         @foreach($provinceSelection as $key => $item)
-                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                            <option value="{{ $item['provCode'] }}">{{ $item['provDesc'] }}</option>
                         @endforeach
                     @endif
                 </select>
                 @error('province') <span class="error" style="color: red"">{{ $message }}</span> @enderror
                 
-                <select wire:model="city" class="form-control" name="city" id="city" style="margin-top: 20px">
-                    <option>-- Select a City --</option>
-                    @if(count($citySelection) > 0)
-                        @foreach($citySelection as $key => $item)
-                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                <select wire:model="municipalities" class="form-control" name="municipalities" id="municipalities" style="margin-top: 20px">
+                    <option>-- Select a Municipalities --</option>
+                    @if(count($municipalitySelection) > 0)
+                        @foreach($municipalitySelection as $key => $item)
+                            <option value="{{ $item['citymunCode'] }}">{{ $item['citymunDesc'] }}</option>
                         @endforeach
                     @endif
                 </select>
-                @error('city') <span class="error" style="color: red"">{{ $message }}</span> @enderror
+                @error('municipalities') <span class="error" style="color: red"">{{ $message }}</span> @enderror
                 
                 <select wire:model="baranggay" class="form-control" name="baranggay" id="barangay" style="margin-top: 20px">
                     <option>-- Select a Baranggay --</option>
                     @if(count($baranggaySelection) > 0)
                         @foreach($baranggaySelection as $key => $item)
-                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                            <option value="{{ $item['brgyCode'] }}">{{ $item['brgyDesc'] }}</option>
                         @endforeach
                     @endif
                 </select>

@@ -5,9 +5,14 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Userinfo;
 use Livewire\WithPagination;
-use Illuminate\Validation\Rule;
+use App\Models\location\Region;
 
+use Illuminate\Validation\Rule;
+use App\Models\location\Province;
+use App\Models\location\Baranggay;
 use Illuminate\Support\Facades\Http;
+use App\Models\location\Municipalities;
+
 
 class VerifyLocation extends Component
 {
@@ -18,11 +23,11 @@ class VerifyLocation extends Component
 
     public $region;
     public $province;
-    public $city;
+    public $municipalities;
     public $baranggay;
     public $regionSelection = [];
     public $provinceSelection = [];
-    public $citySelection = [];
+    public $municipalitySelection = [];
     public $baranggaySelection = [];
 
     //Validation Rules
@@ -30,7 +35,7 @@ class VerifyLocation extends Component
         return [
             'region' => 'required',
             'province' => 'required',
-            'city' => 'required',
+            'municipalities' => 'required',
             'baranggay' => 'required',
         ];
     }
@@ -44,13 +49,13 @@ class VerifyLocation extends Component
     public function modelData(){
         return [
             'user_id' => auth()->user()->endorsers_id,
-            'region' => $this->apiData('regions', $this->region)['name'],
+            'region' => $this->location(new Region, $this->region, 'regCode', true)['regDesc'],
             'region_code' => $this->region,
-            'province' => $this->apiData('provinces', $this->province)['name'],
+            'province' => $this->location(new Province, $this->province, 'provCode', true)['provDesc'],
             'province_code' => $this->province,
-            'city' => $this->apiData('cities', $this->city)['name'],
-            'city_code' => $this->city,
-            'barangay' => $this->apiData('barangays', $this->baranggay)['name'],
+            'municipalities' => $this->location(new Municipalities, $this->municipalities, 'citymunCode', true)['citymunDesc'],
+            'mun_code' => $this->municipalities,
+            'barangay' => $this->location(new Baranggay, $this->baranggay, 'brgyCode', true)['brgyDesc'],
             'barangay_code' => $this->baranggay,
         ];
     }
@@ -91,6 +96,7 @@ class VerifyLocation extends Component
         $this->modalConfirmDeleteVisible = true;
     }
 
+    // For API Data to fetch
     public function api($category, $code = null){
         // https://ph-locations-api.buonzz.com/v1/provinces?filter[where][region_code]=02&filter[order]=name asc
         if($category == 'regions'){
@@ -132,27 +138,42 @@ class VerifyLocation extends Component
         return json_decode($response->body(), true);
     }
 
+    // Alternative For Fetching data From API(If the url source not working anymore)
+    public function location($category, $code = null, $codeType = null, $single = false){
+        if($code == null && $codeType == null){
+            $data = $category::all();
+        }else if($single){
+            $data = $category::where($codeType, $code)->first();
+        }else{
+            $data = $category::where($codeType, $code)->get();
+        }
+        
+        return $data->toArray();
+    }
+
     public function mount(){
-        $this->regionSelection = $this->api('regions');
+        $this->regionSelection = $this->location(new Region);
     }
 
     public function updatedRegion(){
-        $this->citySelection = [];
+        $this->municipalitySelection = [];
         $this->baranggaySelection = [];
-        $this->provinceSelection = $this->api('provinces', $this->region);
+        $this->provinceSelection = $this->location(new Province, $this->region, 'regCode');
     }
 
     public function updatedProvince(){
         $this->baranggaySelection = [];
-        $this->citySelection = $this->api('cities', $this->province);
+        $this->municipalitySelection = $this->location(new Municipalities, $this->province, 'provCode');
     }
 
-    public function updatedCity(){
-        $this->baranggaySelection = $this->api('barangays', $this->city);
+    public function updatedMunicipalities(){
+        $this->baranggaySelection = $this->location(new Baranggay, $this->municipalities, 'citymunCode');
     }
 
     public function render()
     {
+        // $data = Municipalities::where('provCode', '0128')->first();
+        // dd($data);
         return view('verify.location')->layout('layouts.guest');
     }
 }

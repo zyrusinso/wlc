@@ -11,9 +11,9 @@ return new class extends Migration
     {
         Schema::create('user_permissions', function (Blueprint $table) {
             $table->id();
-            $table->string('role')->nullable();
-            $table->string('route_url')->nullable();
-            $table->string('route_name')->nullable();
+            $table->string('role', 50)->nullable();
+            $table->string('route_url', 50)->nullable();
+            $table->string('route_name', 50)->nullable();
             $table->timestamps();
         });
     }

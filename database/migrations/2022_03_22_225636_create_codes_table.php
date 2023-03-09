@@ -15,14 +15,16 @@ return new class extends Migration
     {
         Schema::create('codes', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->nullable();
-            $table->string('status')->nullable();
-            $table->string('product_name')->nullable();
-            $table->string('product_id')->nullable();
-            $table->string('product_code')->nullable();
-            $table->string('category')->nullable();
-            $table->string('user_id')->nullable();
-            $table->string('date_used')->nullable();
+            $table->string('category_id', 20)->nullable();
+            $table->string('sub_category_id', 15)->nullable();
+            $table->string('code', 35)->nullable();
+            $table->string('status', 35)->nullable();
+            $table->string('product_name', 60)->nullable();
+            $table->string('product_id', 15)->nullable();
+            $table->string('product_code', 20)->nullable();
+            $table->string('category', 35)->nullable();
+            $table->string('user_id', 25)->nullable();
+            $table->string('date_used', 50)->nullable();
             $table->timestamps();
         });
     }

@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('group_sales_bonuses', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->nullable();
-            $table->string('buyer_id')->nullable();
-            $table->string('transaction_id')->nullable();
-            $table->string('profit')->nullable();
+            $table->string('user_id', 25)->nullable();
+            $table->string('buyer_id', 25)->nullable();
+            $table->string('transaction_id', 25)->nullable();
+            $table->string('profit', 15)->nullable();
             $table->timestamps();
         });
     }

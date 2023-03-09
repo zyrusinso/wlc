@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('user_roles', function (Blueprint $table) {
             $table->id();
-            $table->string('role')->nullable();
-            $table->string('name')->nullable();
-            $table->string('redirect_url')->nullable();
-            $table->string('redirect_url_name')->nullable();
+            $table->string('role', 50)->nullable();
+            $table->string('name', 60)->nullable();
+            $table->string('redirect_url', 50)->nullable();
+            $table->string('redirect_url_name', 50)->nullable();
             $table->timestamps();
         });
     }

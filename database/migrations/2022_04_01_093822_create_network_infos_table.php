@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('network_infos', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->nullable();
-            $table->string('main_user_id')->nullable();
+            $table->string('user_id', 25)->nullable();
+            $table->string('main_user_id', 25)->nullable();
             $table->timestamps();
         });
     } 

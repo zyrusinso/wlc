@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('product_sub_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('category_id')->nullable();
-            $table->string('sub_cat_name')->nullable();
+            $table->string('category_id', 25)->nullable();
+            $table->string('sub_cat_name', 45)->nullable();
             $table->timestamps();
         });
     }

@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('region_code')->nullable();
             $table->string('province')->nullable();
             $table->string('province_code')->nullable();
-            $table->string('city')->nullable();
-            $table->string('city_code')->nullable();
+            $table->string('municipalities')->nullable();
+            $table->string('mun_code')->nullable();
             $table->string('barangay')->nullable();
             $table->string('barangay_code')->nullable();
             $table->timestamps();

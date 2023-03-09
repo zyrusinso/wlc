@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
-            $table->string('product_code')->nullable();
-            $table->string('product_name')->nullable();
+            $table->string('product_code', 35)->nullable();
+            $table->string('product_name', 60)->nullable();
             $table->string('photo')->nullable();
             $table->string('description')->nullable();
-            $table->string('price')->nullable();
+            $table->string('price', 15)->nullable();
             $table->timestamps();
         });
     }
